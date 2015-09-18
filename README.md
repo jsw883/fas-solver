@@ -30,7 +30,4 @@ It's easy, and usage is contained in [solver.cpp](solver.cpp) already.
 ```bash
 make
 ./solver
-cat ./datasets/karate-club/karate.edges
-cat ./datasets/karate-club/karate-fas.edges
-cat ./datasets/karate-club/karate-dag.edges
 ```
