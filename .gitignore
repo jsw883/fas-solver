@@ -1,0 +1,38 @@
+# Linux executable (solver)
+solver
+
+# Compiled object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled headers
+*.gch
+*.pch
+
+# Compiled libraries (dynamic)
+*.so
+*.dylib
+*.dll
+
+# Compiled libraries (static)
+*.lai
+*.la
+*.a
+*.lib
+
+# Fortran modules
+*.mod
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Files being edited
+*~
+
+# Anything deprecated 
+*deprecated*
+*DEPRECATED*
