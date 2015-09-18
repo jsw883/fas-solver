@@ -30,7 +30,8 @@
 
 // Method 1
 template<typename EdgeW>
-void fas_method1(Graph<EdgeW>& source_graph, Graph<EdgeW>& output_graph) {
+void fas_method1(Graph<EdgeW>& source_graph, Graph<EdgeW>& fas_graph,
+    Graph<EdgeW>& dag_graph) {
   
   // declare variables for while loop
   Graph<EdgeW> graph1, graph2;
@@ -77,8 +78,9 @@ void fas_method1(Graph<EdgeW>& source_graph, Graph<EdgeW>& output_graph) {
     
   }
   
-  // return graph with most weight retained
-  output_graph = (graph1.sum_weights > graph2.sum_weights) ? graph1 : graph2;
+  // return directed acyclic graph with most weight retained
+  fas_graph = (graph1.sum_weights < graph2.sum_weights) ? graph1 : graph2;
+  dag_graph = (graph1.sum_weights > graph2.sum_weights) ? graph1 : graph2;
   
 }
 

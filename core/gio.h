@@ -15,6 +15,7 @@
 #ifndef GIO_H
 #define GIO_H
 
+#include <string>
 #include <fstream>
 
 #include "unpair.h"
@@ -24,11 +25,11 @@
 
 // Load a saved graph edgelist (directed, possibly weighted)
 template<typename EdgeW>
-void load_graph(Graph<EdgeW>& graph, char *filename, bool weighted) {
+void load_graph(Graph<EdgeW>& graph, std::string filename, bool weighted) {
   
   // file input stream for reading
   std::ifstream finput;
-  finput.open(filename);
+  finput.open(filename.c_str());
   
   // declare variables for while loop
   typename std::unordered_map<int, typename Graph<EdgeW>::Node>::iterator iter,
@@ -73,11 +74,11 @@ void load_graph(Graph<EdgeW>& graph, char *filename, bool weighted) {
 
 // Save a graph edgelist (directed, possibly weighted)
 template<typename EdgeW>
-void save_graph(Graph<EdgeW>& graph, char *filename, bool weighted) {
+void save_graph(Graph<EdgeW>& graph, std::string filename, bool weighted) {
   
   // file output stream for writing
   std::ofstream foutput;
-  foutput.open(filename);
+  foutput.open(filename.c_str());
   
   // declare variables for while loop
   typename std::unordered_map<int, typename Graph<EdgeW>::Node>::iterator

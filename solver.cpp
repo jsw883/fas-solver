@@ -12,6 +12,8 @@
 // =============================================================================
 // Headers
 
+#include <string>
+ 
 #include "timing.h"
 #include "unpair.h"
 #include "graph.h"
@@ -35,10 +37,11 @@ int main(int argc, char *argv[]) {
   setbuf(stdout, NULL); // disables buffer so printf displays immediately
   
   // declare variables
-  char *source_filename = (char *) "./demo.edges",
-    *output_filename = (char *) "./demo.dag";
-  bool weighted = false;
-  Graph<double> source_graph, output_graph;
+  std::string
+    source_filename = "./data/USairport2010.edges",
+    output_basename = "./data/USairport2010";
+  bool weighted = true;
+  Graph<double> source_graph, fas_graph, dag_graph;
   
   // parse command line arguments (could use external library)
   for (int i = 1; i < argc; i++) {
@@ -48,7 +51,7 @@ int main(int argc, char *argv[]) {
         i++;
         break;
       case 'o':
-        output_filename = argv[i+1];
+        output_basename = argv[i+1];
         i++;
         break;
       case 'w':
@@ -65,7 +68,7 @@ int main(int argc, char *argv[]) {
   // print header
   printf("[%s build: %s %s time: %s]\n", argv[0], __TIME__, __DATE__,
     get_time());
-  printf("Loading %s\n", source_filename);
+  printf("Loading %s\n", source_filename.c_str());
   
   // =========================================================================
   
@@ -74,11 +77,13 @@ int main(int argc, char *argv[]) {
   printf("Source graph "); source_graph.summary();
   
   // FAS simple approximation method
-  fas_method1(source_graph, output_graph);
+  fas_method1(source_graph, fas_graph, dag_graph);
   
   // save output graph and print simple graph summary
-  save_graph(output_graph, output_filename, weighted);
-  printf("Output graph "); output_graph.summary();
+  save_graph(fas_graph, output_basename + "-fas.edges", weighted);
+  save_graph(dag_graph, output_basename + "-dag.edges", weighted);
+  printf("FAS graph "); fas_graph.summary();
+  printf("DAG graph "); dag_graph.summary();
   
   // =========================================================================
   
